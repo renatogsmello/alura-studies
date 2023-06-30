@@ -1,24 +1,20 @@
 "use client"
-function List() {
-	const tasks = [
-		{
-			name: "React",
-			time: "02:00:00",
-		},
-		{
-			name: "Javascript e typescript",
-			time: "01:00:00",
-		},
-	]
+
+import Item from "./Item"
+import { Itask } from "@/types/task"
+
+interface Props {
+	tasks: Itask[]
+	getSelectedTask: (selectedTask: Itask) => void
+}
+
+function List({ tasks, getSelectedTask }: Props) {
 	return (
 		<aside className="flex flex-col self-stretch gap-4">
 			<h2 className="text-2xl text-sky-200 text-center">Estudos do dia</h2>
 			<ul>
-				{tasks.map((task, index) => (
-					<li key={index} className="mb-4 gap-8 flex justify-between items-center">
-						<h3 className="text-lg text-white">{task.name}</h3>
-						<span className="text-lg font-bold text-sky-400">{task.time}</span>
-					</li>
+				{tasks.map((task) => (
+					<Item getSelectedTask={getSelectedTask} key={task.id} {...task} />
 				))}
 			</ul>
 		</aside>
